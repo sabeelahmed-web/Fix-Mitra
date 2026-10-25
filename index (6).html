@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FixMitra | Home Repairs Made Simple</title>
+<meta name="description" content="FixMitra connects customers with local electricians, plumbers, painters, appliance repair and home maintenance professionals.">
+<style>
+  :root{
+    --blue:#0b3d91; --blue-dark:#072a66; --pink:#c2185b; --pink-soft:#fde7f0;
+    --ink:#1b2430; --muted:#4a5565; --line:#e3e8f0; --bg-soft:#f6f8fc; --white:#ffffff;
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif;
+       color:var(--ink);background:var(--white);font-size:17px;line-height:1.6}
+  img,svg{display:block;max-width:100%}
+  a{color:var(--blue)}
+  :focus-visible{outline:3px solid var(--pink);outline-offset:3px;border-radius:6px}
+  .wrap{width:min(1120px,92%);margin:0 auto}
+  section{padding:64px 0}
+  h1,h2,h3{line-height:1.25;color:var(--blue-dark);margin:0 0 .5em}
+  h1{font-size:clamp(2rem,6vw,3.4rem)}
+  h2{font-size:clamp(1.6rem,4vw,2.2rem)}
+  h3{font-size:1.25rem}
+  p{margin:0 0 1em}
+  .eyebrow{color:var(--pink);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.85rem}
+  .lead{font-size:1.1rem;color:var(--muted);max-width:60ch}
+  .skip{position:absolute;left:-9999px}
+  .skip:focus{left:12px;top:12px;background:var(--white);padding:8px 12px;z-index:99}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 22px;
+       border-radius:999px;border:2px solid transparent;font:inherit;font-weight:700;text-decoration:none;
+       cursor:pointer;transition:transform .15s,background .15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--pink);color:#fff}
+  .btn-primary:hover{background:#a3134c}
+  .btn-outline{background:transparent;color:var(--blue);border-color:var(--blue)}
+  .btn-outline:hover{background:var(--blue);color:#fff}
+  .btn-ghost{background:var(--bg-soft);color:var(--blue-dark);border-color:var(--line)}
+  .btn-wa{background:#128c4a;color:#fff}
+  .btn-wa:hover{background:#0d7140}
+
+  /* Header */
+  .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);
+               border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;min-height:72px}
+  .logo{font-weight:800;font-size:1.4rem;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:8px}
+  .logo span{color:var(--pink)}
+  .nav-links{display:none}
+  .nav-toggle{background:none;border:2px solid var(--line);border-radius:12px;width:48px;height:48px;cursor:pointer;color:var(--blue)}
+  .mobile-menu{display:none;flex-direction:column;gap:4px;padding:8px 0 16px;border-top:1px solid var(--line)}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a,.nav-links a{color:var(--ink);text-decoration:none;font-weight:600;padding:12px 10px;border-radius:10px;min-height:44px;display:flex;align-items:center}
+  .mobile-menu a:hover,.nav-links a:hover{background:var(--bg-soft);color:var(--blue)}
+
+  /* Hero */
+  .hero{background:linear-gradient(160deg,#eef4ff 0%,#fff 60%);padding:56px 0 72px}
+  .hero-grid{display:grid;gap:36px;align-items:center}
+  .hero p.lead{margin-bottom:28px}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px}
+  .hero-note{margin-top:20px;font-size:.95rem;color:var(--muted)}
+  .hero-art{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:28px;
+            box-shadow:0 12px 32px rgba(11,61,145,.08)}
+  .hero-art ul{list-style:none;padding:0;margin:0}
+  .hero-art li{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px dashed var(--line)}
+  .hero-art li:last-child{border:0}
+  .icon{width:44px;height:44px;flex:0 0 44px;border-radius:14px;background:var(--pink-soft);color:var(--pink);display:grid;place-items:center}
+  .icon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  /* Services */
+  .services-grid{display:grid;gap:20px;margin-top:32px}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px;
+        display:flex;flex-direction:column;gap:12px;box-shadow:0 4px 14px rgba(27,36,48,.05)}
+  .card p{color:var(--muted);flex:1;margin:0}
+  .card .btn{width:100%}
+  .bg-soft{background:var(--bg-soft)}
+
+  /* Steps */
+  .steps{display:grid;gap:20px;margin-top:32px;counter-reset:step;padding:0;list-style:none}
+  .steps li{background:var(--white);border-radius:var(--radius);padding:24px;border:1px solid var(--line);position:relative;padding-left:76px}
+  .steps li::before{counter-increment:step;content:counter(step);position:absolute;left:22px;top:20px;width:40px;height:40px;
+                    border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:800}
+  .steps p{color:var(--muted);margin:0}
+
+  /* Form */
+  .form-wrap{display:grid;gap:32px}
+  form{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:grid;gap:18px}
+  .field{display:grid;gap:6px}
+  label{font-weight:700;color:var(--blue-dark)}
+  .hint{font-size:.9rem;color:var(--muted);font-weight:400}
+  input,select,textarea{font:inherit;color:var(--ink);padding:12px 14px;min-height:48px;border:2px solid #cfd7e4;
+                        border-radius:12px;background:#fff;width:100%}
+  textarea{min-height:110px;resize:vertical}
+  input:focus,select:focus,textarea:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px rgba(11,61,145,.15)}
+  input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:#b00020}
+  .error{color:#b00020;font-size:.9rem;font-weight:600;min-height:1em;margin:0}
+  .row{display:grid;gap:18px}
+  .privacy-note{font-size:.9rem;color:var(--muted);margin:0}
+  .review{background:var(--white);border:2px solid var(--blue);border-radius:var(--radius);padding:24px;display:grid;gap:16px}
+  .review dl{display:grid;gap:12px;margin:0}
+  .review dt{font-weight:700;color:var(--blue-dark);font-size:.9rem;text-transform:uppercase;letter-spacing:.04em}
+  .review dd{margin:2px 0 0;white-space:pre-line}
+  .review-actions{display:flex;flex-wrap:wrap;gap:12px}
+  .status{padding:14px 16px;border-radius:12px;background:var(--bg-soft);border:1px solid var(--line);font-size:.95rem;margin:0}
+  .status.warn{background:#fff4e5;border-color:#f0c36d}
+
+  /* About / contact */
+  .two-col{display:grid;gap:32px}
+  .check-list{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
+  .check-list li{display:flex;gap:12px;align-items:flex-start}
+  .check-list li::before{content:"";flex:0 0 12px;height:12px;margin-top:9px;border-radius:50%;background:var(--pink)}
+  .contact-card{background:var(--blue-dark);color:#fff;border-radius:var(--radius);padding:28px}
+  .contact-card h3,.contact-card a{color:#fff}
+  .contact-card a{text-decoration:underline;word-break:break-word}
+  .contact-card .item{margin-bottom:18px}
+  .contact-card .label{font-size:.85rem;opacity:.85;text-transform:uppercase;letter-spacing:.06em}
+  .placeholder{background:#fff4e5;color:#7a4a00;padding:0 6px;border-radius:6px;font-weight:700}
+
+  footer{background:var(--bg-soft);border-top:1px solid var(--line);padding:48px 0 32px;font-size:.95rem}
+  .footer-grid{display:grid;gap:28px}
+  footer ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+  footer a{color:var(--ink);text-decoration:none;display:inline-block;padding:4px 0;min-height:32px}
+  footer a:hover{color:var(--blue);text-decoration:underline}
+  .copy{margin-top:32px;color:var(--muted);font-size:.85rem}
+  .legal{background:var(--white)}
+  .legal p{color:var(--muted)}
+
+  @media (min-width:768px){
+    .services-grid{grid-template-columns:repeat(2,1fr)}
+    .hero-grid{grid-template-columns:1.1fr .9fr}
+    .steps{grid-template-columns:repeat(3,1fr)}
+    .form-wrap{grid-template-columns:1fr}
+    .row{grid-template-columns:1fr 1fr}
+    .two-col{grid-template-columns:1fr 1fr}
+    .footer-grid{grid-template-columns:2fr 1fr 1fr 1fr}
+  }
+  @media (min-width:1000px){
+    .services-grid{grid-template-columns:repeat(3,1fr)}
+    .nav-links{display:flex;gap:6px}
+    .nav-toggle{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="#home" class="logo" aria-label="FixMitra home">Fix<span>Mitra</span></a>
+    <nav aria-label="Main">
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#book" class="btn btn-primary" style="min-height:42px;padding:8px 16px;margin-left:8px">Book a Service</a>
+      </div>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="wrap mobile-menu" id="mobileMenu">
+    <a href="#services">Services</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="#book">Book a Service</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- 1. HERO -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Local home help in [YOUR SERVICE AREA]</p>
+      <h1>Home Repairs Made Simple</h1>
+      <p class="lead">Find local help for electrical work, plumbing, painting, appliance repair and everyday home maintenance. Tell us what you need, and we will connect you with a local service professional.</p>
+      <div class="cta-row">
+        <a href="#book" class="btn btn-primary">Book a Service</a>
+        <a href="#services" class="btn btn-outline">Explore Services</a>
+      </div>
+      <p class="hero-note">Requests are sent to FixMitra on WhatsApp. Nothing is booked until FixMitra confirms with you.</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <ul>
+        <li><span class="icon"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span><div><strong>Electrical</strong><br><span class="hint">Fans, lights, switches, wiring checks</span></div></li>
+        <li><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/></svg></span><div><strong>Plumbing</strong><br><span class="hint">Taps, leaks, drains, fittings</span></div></li>
+        <li><span class="icon"><svg viewBox="0 0 24 24"><path d="M3 4h14v5H3zM17 6h3v5h-7v3M11 12v8"/></svg></span><div><strong>Painting</strong><br><span class="hint">Interior and exterior touch-ups</span></div></li>
+        <li><span class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></span><div><strong>Appliance Repair</strong><br><span class="hint">Washing machines, fridges, mixers</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 2. SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <p class="eyebrow">Services</p>
+    <h2>What can we help with?</h2>
+    <p class="lead">Choose a service below. Clicking a button selects that service in the booking form.</p>
+    <div class="services-grid">
+      <article class="card">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span>
+        <h3>Electrician</h3>
+        <p>Fan, light and switch repairs, socket and wiring checks, and minor electrical fixes.</p>
+        <button class="btn btn-ghost" type="button" data-service="Electrician">Select Electrician</button>
+      </article>
+      <article class="card">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/></svg></span>
+        <h3>Plumbing</h3>
+        <p>Leaking taps, blocked drains, toilet and water-line repairs, and bathroom fittings.</p>
+        <button class="btn btn-ghost" type="button" data-service="Plumbing">Select Plumbing</button>
+      </article>
+      <article class="card">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 4h14v5H3zM17 6h3v5h-7v3M11 12v8"/></svg></span>
+        <h3>Painting</h3>
+        <p>Interior and exterior painting, wall touch-ups, and small repainting jobs.</p>
+        <button class="btn btn-ghost" type="button" data-service="Painting">Select Painting</button>
+      </article>
+      <article class="card">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg></span>
+        <h3>Appliance Repair</h3>
+        <p>Diagnosis and repair for common home appliances such as washing machines, fridges and mixers.</p>
+        <button class="btn btn-ghost" type="button" data-service="Appliance Repair">Select Appliance Repair</button>
+      </article>
+      <article class="card">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 20L14 10M14 4l6 6-3 3-6-6zM3 21l3-3"/></svg></span>
+        <h3>Carpentry</h3>
+        <p>Door and cupboard fixes, hinges, shelves and small woodwork repairs.</p>
+        <button class="btn btn-ghost" type="button" data-service="Carpentry">Select Carpentry</button>
+      </article>
+      <article class="card">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></svg></span>
+        <h3>Home Maintenance</h3>
+        <p>Routine checks and small fixes that keep your home in good working order.</p>
+        <button class="btn btn-ghost" type="button" data-service="Home Maintenance">Select Home Maintenance</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap two-col">
+    <div>
+      <p class="eyebrow">Pricing</p>
+      <h2>₹150 per hour</h2>
+      <p class="lead">The same rate applies to every service: Electrician, Plumbing, Painting, Appliance Repair, Carpentry and Home Maintenance.</p>
+      <p class="hint">Materials and spare parts, if needed, are discussed with you before they are bought.</p>
+    </div>
+    <div class="card">
+      <h3>How payment works</h3>
+      <ul class="check-list">
+        <li>You send your request. FixMitra confirms the service and the estimated hours with you on WhatsApp.</li>
+        <li>No payment is taken on this website in this version.</li>
+        <li>Payment is made directly after the work, by <span class="placeholder">[PLACEHOLDER: UPI ID or cash, to confirm]</span>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3. HOW IT WORKS -->
+<section id="how-it-works" class="bg-soft">
+  <div class="wrap">
+    <p class="eyebrow">How It Works</p>
+    <h2>Three simple steps</h2>
+    <ol class="steps">
+      <li><h3>Choose a service</h3><p>Pick the type of help you need from our services list.</p></li>
+      <li><h3>Submit your request</h3><p>Fill in the short form, review your details, then send the request to FixMitra on WhatsApp.</p></li>
+      <li><h3>Receive confirmation</h3><p>The FixMitra team contacts you on WhatsApp or by phone to confirm the details and availability.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 4. BOOKING FORM -->
+<section id="book">
+  <div class="wrap form-wrap">
+    <div>
+      <p class="eyebrow">Book a Service</p>
+      <h2>Tell us what you need</h2>
+      <p class="lead">Fields marked * are required. Your request is only sent when you tap the WhatsApp button at the end.</p>
+    </div>
+
+    <form id="booking-form" novalidate>
+      <p id="formStatus" class="status" role="status" aria-live="polite" hidden></p>
+
+      <div class="row">
+        <div class="field">
+          <label for="name">Full name *</label>
+          <input id="name" name="name" type="text" autocomplete="name" required aria-describedby="name-err">
+          <p class="error" id="name-err"></p>
+        </div>
+        <div class="field">
+          <label for="mobile">Indian mobile number *</label>
+          <input id="mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel" placeholder="e.g. 98765 43210" required aria-describedby="mobile-err mobile-hint">
+          <span class="hint" id="mobile-hint">10 digits starting with 6, 7, 8 or 9. +91 is optional.</span>
+          <p class="error" id="mobile-err"></p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="service">Service category *</label>
+        <select id="service" name="service" required aria-describedby="service-err">
+          <option value="">Choose a service</option>
+          <option>Electrician</option>
+          <option>Plumbing</option>
+          <option>Painting</option>
+          <option>Appliance Repair</option>
+          <option>Carpentry</option>
+          <option>Home Maintenance</option>
+        </select>
+        <p class="error" id="service-err"></p>
+      </div>
+
+      <div class="field">
+        <label for="address">Address or locality *</label>
+        <input id="address" name="address" type="text" autocomplete="street-address" required aria-describedby="address-err">
+        <p class="error" id="address-err"></p>
+      </div>
+
+      <div class="field">
+        <label for="problem">Describe the problem *</label>
+        <textarea id="problem" name="problem" required aria-describedby="problem-err problem-hint"></textarea>
+        <span class="hint" id="problem-hint">For example: "Bathroom tap leaking since yesterday, water dripping constantly."</span>
+        <p class="error" id="problem-err"></p>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="date">Preferred date <span class="hint">(optional)</span></label>
+          <input id="date" name="date" type="date" aria-describedby="date-err">
+          <p class="error" id="date-err"></p>
+        </div>
+        <div class="field">
+          <label for="time">Preferred time <span class="hint">(optional)</span></label>
+          <input id="time" name="time" type="time">
+        </div>
+      </div>
+
+      <p class="privacy-note">We use your details only to respond to your request. See our <a href="#privacy">Privacy Policy</a>.</p>
+      <div><button class="btn btn-primary" type="submit">Review My Request</button></div>
+    </form>
+
+    <!-- Review step: shown after the form passes validation -->
+    <div class="review" id="review" hidden aria-labelledby="review-title">
+      <h3 id="review-title">Review your request</h3>
+      <dl>
+        <div><dt>Name</dt><dd id="r-name"></dd></div>
+        <div><dt>Mobile</dt><dd id="r-mobile"></dd></div>
+        <div><dt>Service</dt><dd id="r-service"></dd></div>
+        <div><dt>Address or locality</dt><dd id="r-address"></dd></div>
+        <div><dt>Problem</dt><dd id="r-problem"></dd></div>
+        <div><dt>Preferred date and time</dt><dd id="r-when"></dd></div>
+        <div><dt>Rate</dt><dd>₹150 per hour. FixMitra confirms the estimated hours with you before any work starts.</dd></div>
+      </dl>
+      <p class="status" id="sendNote" hidden></p>
+      <div class="review-actions">
+        <button class="btn btn-wa" type="button" id="sendWa">Send Request on WhatsApp</button>
+        <button class="btn btn-outline" type="button" id="editReq">Edit Details</button>
+      </div>
+      <p class="hint">Nothing is saved on this website. Sending opens WhatsApp with your message filled in; you press send there.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. ABOUT / TRUST -->
+<section id="about" class="bg-soft">
+  <div class="wrap two-col">
+    <div>
+      <p class="eyebrow">About FixMitra</p>
+      <h2>A simple link between you and local help</h2>
+      <p>FixMitra helps households in [YOUR SERVICE AREA] find local professionals for electrical, plumbing, painting, appliance repair and home maintenance work.</p>
+      <p>We do not claim credentials, ratings or job numbers on this site. Before any work begins, the FixMitra team will confirm the details of your request with you, including the service, the visit time and the expected scope of work.</p>
+    </div>
+    <div>
+      <h3>How we work</h3>
+      <ul class="check-list">
+        <li>You describe the problem in your own words.</li>
+        <li>We confirm your request with you before anything is arranged.</li>
+        <li>You decide whether to go ahead after you know the details.</li>
+        <li>Payments are not taken through this website.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CONTACT -->
+<section id="contact">
+  <div class="wrap two-col">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h2>Get in touch</h2>
+      <p class="lead">Prefer to ask first? Message us on WhatsApp or call during business hours.</p>
+      <p><a class="btn btn-wa" id="contactWa" href="#book">Chat with us on WhatsApp</a></p>
+      <p class="hint" id="contactWaNote"></p>
+    </div>
+    <div class="contact-card">
+      <div class="item"><div class="label">Phone</div><a href="tel:+91XXXXXXXXXX">+91 XXXXX XXXXX</a> <span class="placeholder">[PLACEHOLDER: business phone]</span></div>
+      <div class="item"><div class="label">Email</div><a href="mailto:sabeelahmed8940@gmail.com">sabeelahmed8940@gmail.com</a></div>
+      <div class="item"><div class="label">Service area</div>[YOUR SERVICE AREA], Tamil Nadu, India <span class="placeholder">[PLACEHOLDER: real localities]</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Legal placeholders -->
+<section id="privacy" class="legal">
+  <div class="wrap">
+    <h2>Privacy Policy</h2>
+    <p><span class="placeholder">[PLACEHOLDER: privacy policy text to be written or reviewed by the business owner]</span></p>
+  </div>
+</section>
+<section id="terms" class="legal" style="padding-top:0">
+  <div class="wrap">
+    <h2>Terms of Use</h2>
+    <p><span class="placeholder">[PLACEHOLDER: terms of use text to be written or reviewed by the business owner]</span></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <strong style="color:var(--blue);font-size:1.2rem">Fix<span style="color:var(--pink)">Mitra</span></strong>
+      <p class="hint" style="margin-top:8px">Home repairs made simple in [YOUR SERVICE AREA].</p>
+    </div>
+    <nav aria-label="Footer about"><strong>About</strong><ul><li><a href="#about">About FixMitra</a></li><li><a href="#how-it-works">How It Works</a></li></ul></nav>
+    <nav aria-label="Footer services"><strong>Services</strong><ul><li><a href="#services">All services</a></li><li><a href="#book">Book a Service</a></li></ul></nav>
+    <nav aria-label="Footer legal"><strong>Contact &amp; Legal</strong><ul><li><a href="#contact">Contact</a></li><li><a href="#privacy">Privacy Policy</a></li><li><a href="#terms">Terms</a></li></ul></nav>
+  </div>
+  <div class="wrap copy">&copy; <span id="year"></span> FixMitra. All rights reserved.</div>
+</footer>
+
+<script>
+/* ============================================================
+   SETTINGS: edit these values to change the business details.
+   ============================================================ */
+const CONFIG = {
+  // Business WhatsApp number: country code 91 + 10-digit mobile, digits only, no +.
+  whatsappNumber: "918940133489",
+  // Service rate in rupees per hour, shown to customers for every service.
+  hourlyRate: 150,
+  // Google Apps Script Web app URL. Requests are saved to your Requests sheet.
+  scriptUrl: "https://script.google.com/macros/s/AKfycby18kBJ2VRU30Yn7uFBnr7L1AAhV9FQ-7M7DIRZHrdJ_UsQbWRUj-063r6wBLEWmyvu/exec"
+};
+
+/* ---------- helpers ---------- */
+const $ = (id) => {
+  const el = document.getElementById(id);
+  if (!el) console.error("FixMitra: missing element with id =", id);
+  return el;
+};
+const on = (el, evt, fn) => { if (el) el.addEventListener(evt, fn); };
+
+const isWhatsAppConfigured = () => /^91[6-9]\d{9}$/.test(CONFIG.whatsappNumber);
+
+function todayLocal() {
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+}
+
+function normalizeMobile(raw) {
+  const digits = (raw || "").replace(/[\s-]/g, "");
+  const m = digits.match(/^(?:\+?91)?([6-9]\d{9})$/);
+  return m ? m[1] : null;
+}
+
+// Saves the request to the Google Sheet. Returns true only if the sheet confirms it.
+async function saveRequest(v) {
+  if (!CONFIG.scriptUrl) return false;
+  try {
+    const res = await fetch(CONFIG.scriptUrl, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        name: v.name,
+        mobile: normalizeMobile(v.mobile),
+        service: v.service,
+        address: v.address,
+        problem: v.problem,
+        date: v.date,
+        time: v.time
+      })
+    });
+    const out = await res.json();
+    return out.ok === true;
+  } catch (e) {
+    return false;
+  }
+}
+
+/* ---------- contact WhatsApp link ---------- */
+function setContactWhatsApp() {
+  const link = $("contactWa");
+  const note = $("contactWaNote");
+  if (!link || !note) return;
+  if (!isWhatsAppConfigured()) {
+    note.textContent = "WhatsApp number not set yet. Replace the placeholder in CONFIG in index.html.";
+    link.setAttribute("aria-disabled", "true");
+    return;
+  }
+  note.textContent = "Opens WhatsApp with a short message. FixMitra replies to confirm.";
+  link.href = "https://wa.me/" + CONFIG.whatsappNumber + "?text=" +
+    encodeURIComponent("Hello FixMitra, I have a question about your services.");
+  link.target = "_blank";
+  link.rel = "noopener";
+}
+
+/* ---------- mobile menu ---------- */
+const navToggle = $("navToggle");
+const mobileMenu = $("mobileMenu");
+on(navToggle, "click", () => {
+  if (!mobileMenu) return;
+  const open = mobileMenu.classList.toggle("open");
+  navToggle.setAttribute("aria-expanded", String(open));
+  navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+});
+if (mobileMenu) {
+  mobileMenu.querySelectorAll("a").forEach(a => on(a, "click", () => {
+    mobileMenu.classList.remove("open");
+    if (navToggle) navToggle.setAttribute("aria-expanded", "false");
+  }));
+}
+
+/* ---------- service selection buttons ---------- */
+document.querySelectorAll("[data-service]").forEach(btn => {
+  on(btn, "click", () => {
+    const service = $("service");
+    if (service) {
+      service.value = btn.dataset.service;
+      service.removeAttribute("aria-invalid");
+    }
+    if ($("service-err")) $("service-err").textContent = "";
+    if ($("review")) $("review").hidden = true;
+    if ($("formStatus")) $("formStatus").hidden = true;
+    if ($("book")) $("book").scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => { if ($("name")) $("name").focus({ preventScroll: true }); }, 400);
+  });
+});
+
+/* ---------- validation ---------- */
+const rules = {
+  name:    { el: "name",    msg: "Please enter your full name (at least 2 letters)." },
+  mobile:  { el: "mobile",  msg: "Enter a valid Indian mobile number, e.g. 98765 43210." },
+  service: { el: "service", msg: "Please choose a service." },
+  address: { el: "address", msg: "Please enter your address or locality (at least 5 characters)." },
+  problem: { el: "problem", msg: "Please describe the problem (at least 10 characters)." },
+  date:    { el: "date",    msg: "Preferred date cannot be in the past." }
+};
+
+function setError(key, msg) {
+  const input = $(rules[key].el);
+  const err = $(rules[key].el + "-err");
+  if (err) err.textContent = msg || "";
+  if (!input) return;
+  if (msg) input.setAttribute("aria-invalid", "true");
+  else input.removeAttribute("aria-invalid");
+}
+
+function readForm() {
+  const val = (id) => (($(id) && $(id).value) || "").trim();
+  return {
+    name: val("name"),
+    mobile: val("mobile"),
+    service: val("service"),
+    address: val("address"),
+    problem: val("problem"),
+    date: val("date"),
+    time: val("time")
+  };
+}
+
+function validate(values) {
+  const errors = {};
+  if (values.name.length < 2) errors.name = rules.name.msg;
+  if (!normalizeMobile(values.mobile)) errors.mobile = rules.mobile.msg;
+  if (!values.service) errors.service = rules.service.msg;
+  if (values.address.length < 5) errors.address = rules.address.msg;
+  if (values.problem.length < 10) errors.problem = rules.problem.msg;
+  if (values.date) {
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const chosen = new Date(values.date + "T00:00:00");
+    if (chosen < today) errors.date = rules.date.msg;
+  }
+  return errors;
+}
+
+/* ---------- review panel ---------- */
+let currentValues = null;
+
+function fillReview(v) {
+  const set = (id, text) => { const el = $(id); if (el) el.textContent = text; };
+  const mobile = normalizeMobile(v.mobile) || "";
+  set("r-name", v.name);
+  set("r-mobile", "+91 " + mobile.slice(0, 5) + " " + mobile.slice(5));
+  set("r-service", v.service);
+  set("r-address", v.address);
+  set("r-problem", v.problem);
+  set("r-when", [v.date, v.time].filter(Boolean).join(" at ") || "Not specified");
+}
+
+on($("booking-form"), "submit", (e) => {
+  e.preventDefault();
+  const values = readForm();
+  const errors = validate(values);
+  Object.keys(rules).forEach(k => setError(k, errors[k] || ""));
+
+  const status = $("formStatus");
+  const firstKey = Object.keys(rules).find(k => errors[k]);
+  if (firstKey) {
+    if (status) {
+      status.hidden = false;
+      status.className = "status warn";
+      status.textContent = "Please fix the highlighted fields. Your request has not been sent.";
+    }
+    const firstField = $(rules[firstKey].el);
+    if (firstField) firstField.focus();
+    if ($("review")) $("review").hidden = true;
+    return;
+  }
+
+  if (status) status.hidden = true;
+  currentValues = values;
+  fillReview(values);
+  if ($("review")) {
+    $("review").hidden = false;
+    $("review").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  if ($("sendNote")) $("sendNote").hidden = true;
+  if ($("review-title")) {
+    $("review-title").setAttribute("tabindex", "-1");
+    $("review-title").focus({ preventScroll: true });
+  }
+});
+
+Object.keys(rules).forEach(k => {
+  on($(rules[k].el), "blur", () => {
+    const errors = validate(readForm());
+    setError(k, errors[k] || "");
+  });
+});
+
+on($("editReq"), "click", () => {
+  if ($("review")) $("review").hidden = true;
+  if ($("name")) $("name").focus();
+});
+
+/* ---------- send: open WhatsApp, then save to the Google Sheet ---------- */
+on($("sendWa"), "click", async () => {
+  const note = $("sendNote");
+  const setNote = (cls, text) => {
+    if (!note) return;
+    note.hidden = false;
+    note.className = cls;
+    note.textContent = text;
+  };
+
+  if (!currentValues) {
+    setNote("status warn", "Please fill in the form and review your request first.");
+    return;
+  }
+  if (!isWhatsAppConfigured()) {
+    setNote("status warn", "WhatsApp is not set up yet. Your request was not sent.");
+    return;
+  }
+
+  const v = currentValues;
+  const when = [v.date, v.time].filter(Boolean).join(" at ") || "Not specified";
+  const message =
+    "Hello FixMitra, I would like to request a service.\n\n" +
+    "Name: " + v.name + "\n" +
+    "Mobile: +91 " + normalizeMobile(v.mobile) + "\n" +
+    "Service: " + v.service + "\n" +
+    "Address/locality: " + v.address + "\n" +
+    "Problem: " + v.problem + "\n" +
+    "Preferred date/time: " + when + "\n" +
+    "Rate: ₹" + CONFIG.hourlyRate + " per hour (estimated hours to be confirmed)\n\n" +
+    "Please confirm availability and next steps.";
+
+  window.open("https://wa.me/" + CONFIG.whatsappNumber + "?text=" + encodeURIComponent(message), "_blank", "noopener");
+
+  setNote("status", "Opening WhatsApp... saving your request.");
+  const saved = await saveRequest(v);
+  setNote("status",
+    saved
+      ? "Your request is saved and WhatsApp is open. FixMitra will reply to confirm your booking."
+      : "WhatsApp is open. Your request could not be saved online, so please send it in WhatsApp."
+  );
+});
+
+/* ---------- init ---------- */
+const dateInput = $("date");
+if (dateInput) dateInput.min = todayLocal();
+const yearEl = $("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+setContactWhatsApp();
+</script>
+</body>
+</html>
